@@ -1,0 +1,249 @@
+/* 🌐 Cyber Password Strength Checker — Premium Light & Dark Modes */
+
+:root {
+  --accent: #00b4d8;
+  --accent-hover: #0096c7;
+  --success: #16a34a;
+  --warning: #facc15;
+  --danger: #dc2626;
+  --border: #d1d5db;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --card-bg: rgba(255, 255, 255, 0.93);
+  --body-bg: url("https://images.unsplash.com/photo-1620812097580-5800c12c0b36?auto=format&fit=crop&w=1600&q=80");
+  --overlay-color: rgba(255, 255, 255, 0.6);
+}
+
+/* 🌙 Dark Mode */
+body.dark-mode {
+  --card-bg: rgba(15, 23, 42, 0.88);
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --border: #475569;
+  --body-bg: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+  --overlay-color: rgba(0, 0, 0, 0.6);
+}
+
+/* ============ BODY BACKGROUND ============ */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  background: var(--body-bg) center/cover no-repeat fixed;
+  position: relative;
+  transition: all 0.6s ease;
+  overflow-x: hidden;
+}
+
+/* ✨ Overlay for text contrast */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-color);
+  z-index: 0;
+  transition: background 0.6s ease;
+}
+
+/* 🌐 Animated cyber-blue glow background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(0, 162, 255, 0.15), transparent 70%),
+    radial-gradient(circle at 70% 70%, rgba(0, 204, 255, 0.1), transparent 70%),
+    radial-gradient(circle at 50% 90%, rgba(0, 140, 255, 0.1), transparent 70%);
+  background-blend-mode: screen;
+  animation: pulseGlow 7s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+body.dark-mode::before {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(56,189,248,0.1), transparent 70%),
+    radial-gradient(circle at 80% 20%, rgba(147,197,253,0.08), transparent 70%),
+    radial-gradient(circle at 20% 80%, rgba(59,130,246,0.05), transparent 70%);
+  background-blend-mode: lighten;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+/* ============ CARD ============ */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 45px 40px;
+  width: 90%;
+  max-width: 460px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease, background 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.3);
+}
+
+/* ============ THEME TOGGLE ============ */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  z-index: 999;
+}
+
+.toggle-label {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 30px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.toggle-label i {
+  color: #f59e0b;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+body.dark-mode .toggle-label {
+  background: rgba(30, 41, 59, 0.7);
+}
+
+body.dark-mode .toggle-label i.fa-moon {
+  color: #93c5fd;
+  transform: rotate(-20deg);
+}
+
+#themeSwitch {
+  display: none;
+}
+
+/* ============ FORM ELEMENTS ============ */
+h1 {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 12px 14px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+  color: var(--text-main);
+}
+
+.input-group button {
+  background: none;
+  border: none;
+  padding: 10px 14px;
+  cursor: pointer;
+  color: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.input-group button:hover {
+  color: var(--accent-hover);
+}
+
+.meter {
+  margin-top: 20px;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#bar {
+  height: 100%;
+  width: 0;
+  transition: width 0.4s ease, background 0.3s ease;
+}
+
+.strength-text {
+  margin-top: 10px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.criteria {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.criteria li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.criteria li.good {
+  color: var(--success);
+}
+
+.criteria li.bad {
+  color: var(--danger);
+}
+
+/* 💡 Suggestions box */
+.suggestions {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  padding: 10px 15px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .suggestions {
+  background: rgba(255,255,255,0.08);
+}
+
+/* ============ FOOTER ============ */
+footer {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--text-main);
+  z-index: 3;
+  position: relative;
+  font-weight: 500;
+}
+
+footer strong,
+footer span,
+footer i {
+  color: var(--accent);
+}
