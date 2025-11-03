@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔐 Password Strength Checker</title>
+
+  <!-- 🔹 Meta Info -->
+  <meta name="description" content="Check your password strength instantly with this smart, cyber-themed password strength checker. Built by Sham.">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+  <!-- 🔹 Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- 🔹 Custom Styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <!-- 🌗 Theme Toggle -->
+  <div class="theme-toggle">
+    <input type="checkbox" id="themeSwitch" />
+    <label for="themeSwitch" class="toggle-label" title="Switch theme">
+      <i class="fa-solid fa-sun"></i>
+      <i class="fa-solid fa-moon"></i>
+    </label>
+  </div>
+
+  <!-- ✨ Subtle Overlay -->
+  <div class="overlay"></div>
+
+  <div class="page">
+    <div class="card">
+      <header>
+        <h1><i class="fa-solid fa-lock"></i> <span>Password Strength Checker</span></h1>
+        <p class="subtitle">Check and improve your password strength instantly</p>
+      </header>
+
+      <form id="passwordForm" onsubmit="return false">
+        <label for="password" class="form-label">Enter Password</label>
+        <div class="input-group">
+          <input type="password" id="password" placeholder="Type your password..." autocomplete="off" />
+          <button type="button" id="toggleBtn" aria-label="Show/Hide password">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+          <button type="button" id="copyBtn" aria-label="Copy password">
+            <i class="fa-solid fa-copy"></i>
+          </button>
+        </div>
+      </form>
+
+      <div class="meter">
+        <div id="bar"></div>
+      </div>
+
+      <!-- 🔹 Live-updating strength text for accessibility -->
+      <p id="strengthText" class="strength-text" aria-live="polite">
+        Start typing to check password strength
+      </p>
+
+      <ul class="criteria">
+        <li id="len">❌ Minimum 8 characters</li>
+        <li id="lower">❌ At least one lowercase letter</li>
+        <li id="upper">❌ At least one uppercase letter</li>
+        <li id="num">❌ At least one number</li>
+        <li id="special">❌ At least one special character</li>
+      </ul>
+
+      <div id="suggestions" class="suggestions hidden">
+        <h3>Suggestions</h3>
+        <ul id="suggestList"></ul>
+      </div>
+    </div>
+
+    <footer>
+      Built with 💙 by <strong>Sham</strong>
+    </footer>
+  </div>
+
+  <!-- 🔹 Scripts -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
